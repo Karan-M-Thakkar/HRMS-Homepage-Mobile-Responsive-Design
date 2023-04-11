@@ -1,0 +1,17 @@
+.alert-wrapper {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.alert-wrapper > img {
+    width: 96px;
+}
+
+.alert-description {
+    color: #878681;
+    line-height: 1.5;
+    text-align: center;
+}

@@ -1,0 +1,6 @@
+
+<div class="alert-wrapper">
+    <img src="../images/verified.gif" alt="" srcset="">
+    <h4>{{alert.display.alertType | uppercase}}</h4>
+    <p class="alert-description" ng-bind-html="alert.trustAsHtml(alert.display.description)"></p>
+</div>

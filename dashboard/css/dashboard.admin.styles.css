@@ -1,0 +1,340 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+html::-webkit-scrollbar
+{
+	width: 8px;
+	background-color: #F5F5F5;
+}
+
+html::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(241, 241, 241, 0.3);
+	background-color: #555;
+}
+
+html {
+  font-size: 10px;
+  overflow-y: scroll;
+}
+
+@media (min-width: 1024px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 1088px) {
+  html {
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 1120px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1320px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  background-color: #f9fbfe;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  position: relative;
+}
+
+select, option {
+  cursor: pointer;
+}
+
+.required-field:after {
+  content: " *";
+  color: red;
+}
+
+.branding-ribbon-container {
+  background-image: url("../images/Final_Journey\ Wall\ header\ cropped.jpg");
+  height: 80px;
+  position: relative;
+  background-size: contain;
+}
+
+.branding-ribbon-logo-container {
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0,0,0,0));
+  background-size: contain;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+}
+
+.branding-ribbon-logo-container > img {
+  width: 240px;
+}
+
+.admin-tabs-list {
+  list-style-type: none;
+  padding-left: 0; /* to override bootstrap default style */
+}
+
+.admin-tabs-list-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  color: grey;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+.active-admin-tabs-list-item {
+  border-left: 4px solid #3653a4;
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1) !important;
+  border-radius: 8px;
+  color: #3653a4;
+  font-weight: 700;
+}
+
+.admin-tabs-list-item:hover {
+  color: #3653a4;
+  font-weight: 700;
+}
+
+.admin-tabs-list-item::before {
+  display: block;
+  border-left: 4px solid transparent;
+  content: attr(title);
+  font-weight: 700;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+
+.container {
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15) !important;
+  border-radius: 8px;
+  background-color: #fff;
+  flex-grow: 1;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  padding: 32px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.admin-search-container, .admin-form-container {
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: 2px solid #3653a4;
+}
+
+.admin-search-container {
+  position: relative;
+  padding-top: 16px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-form-container {
+  flex-grow: 1;
+  position: relative;
+  padding-top: 32px;
+  padding-bottom: 24px;
+}
+
+.container-header {
+  background-color: #ffffff;
+  padding: 0 16px;
+  position: absolute;
+  top: 0;
+  left: 20px;
+  transform: translate(0, -50%);
+  margin: 0;
+  color: #3653a4;
+  font-weight: 700;
+}
+
+.date-input {
+  width: 240px;
+}
+
+.button-group > button:not(:last-child) {
+  margin-right: 12px;
+}
+
+.button-group > button:focus,
+.button-group > button:focus-visible,
+.button-group > button:active {
+  outline: none !important;
+}
+
+.content-wrapper {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.right-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.form-group > label {
+  font-weight: 500;
+  color: grey;
+}
+
+.multiple-form-control-container {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.not-valid {
+  border-color: red;
+}
+
+.edit-icon-wrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-icon-wrapper > img {
+  width: 15px;
+  cursor: pointer;
+  margin-right: 20%;
+}
+
+.ui-grid-pager-row-count-picker select { 
+  height: 28px;
+}
+
+.add-btn {
+  width: 60%;
+  margin-left: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-btn > img, .back-to-search-btn > img {
+  width: 12px;
+  margin-right: 4px;
+  filter: invert(1);
+}
+
+.back-to-search-btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-grid-row, .search-grid-column {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.grid {
+  flex-grow: 1;
+}
+
+.no-records-watermark {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  opacity: 0.5;
+  width: 100%;
+  text-align: center;
+  z-index: 1000;
+  font-size: 1.2rem;
+}
+
+.alert {
+  margin-bottom: 0;
+  padding: 4px;
+}
+
+.back-btn-wrapper {
+  margin-left: auto;
+}
+
+/* loader styles */
+.loader-background {
+  position: fixed;
+  min-height: 100vh;
+  width: 100vw;
+  z-index: 10000000;
+  background-color: #00000096;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  position: relative;
+  animation: rotate 1s linear infinite
+}
+.loader::before , .loader::after {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  inset: 0px;
+  border-radius: 50%;
+  border: 5px solid #FFF;
+  animation: prixClipFix 2s linear infinite ;
+}
+.loader::after{
+  border-color: #67a242;
+  animation: prixClipFix 2s linear infinite , rotate 0.5s linear infinite reverse;
+  inset: 6px;
+}
+
+@keyframes rotate {
+  0%   {transform: rotate(0deg)}
+  100%   {transform: rotate(360deg)}
+}
+
+@keyframes prixClipFix {
+    0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)}
+    25%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
+    50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
+    75%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 100%)}
+    100% {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 0)}
+}

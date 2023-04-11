@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="dashboardApp">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Bootstrap v5.2.3 -->
+  <link rel="stylesheet" href="dashboard/css/bootstrap.min.css">
+  <script src="dashboard/js/bootstrap.bundle.min.js"></script>
+  <!-- custom CSS -->
+  <link rel="stylesheet" href="dashboard/css/dashboard.styles.css" />
+  <!-- angularJS v1.8.2 -->
+  <script src="dashboard/js/angular.min.js"></script>
+  <title>HRMS</title>
+</head>
+
+<body ng-controller="dashboardCtrl">
+  <!-- loader -->
+  <div class="loader-background" api-call-loader>
+    <span class="loader"></span>
+  </div>
+  <!-- loader -->
+
+  <!-- branding ribbon -->
+  <div class="branding-ribbon-container">
+    <div class="branding-ribbon-logo-container">
+      <img src="dashboard/images/Napier Catalyst_Web_white.png" alt="" />
+    </div>
+  </div>
+  <!-- branding ribbon -->
+
+  <nav class="navbar navbar-dark sticky-top navbar-expand-lg">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown me-4" ng-repeat="category in categories">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false" title="{{ category.category }}">
+              {{ category.category }}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li ng-repeat="module in category.modules" ng-click="respondToMenuItemClick(module.moduleId)"
+                class="module-link">
+                <a class="dropdown-item">{{ module.moduleName }}</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="navbar-actions-container">
+        <div class="navbar-username-container mb-2">
+          <span class="navbar-text">
+            Karankumar Mahendrabhai Thakkar
+          </span>
+        </div>
+        <div class="navbar-actions-btn-container">
+          <button class="btn btn-outline-light navbar-actions-btn" type="button" data-bs-toggle="tooltip"
+            data-bs-placement="bottom" title="Administration" ng-click="openDashboardAdmin()" ng-if="renderAdministrationBtn">
+            <img src="dashboard/images/settings.png" alt="">
+          </button>
+          <button class="btn btn-outline-light navbar-actions-btn" type="button" data-bs-toggle="popover"
+            data-bs-placement="bottom"
+            data-bs-content="Coming Soon!">
+            <img src="dashboard/images/notification.png" alt="" />
+          </button>
+          <button class="btn btn-outline-light navbar-actions-btn" id="contactSupportBtn" type="button"
+            data-bs-toggle="tooltip" data-bs-placement="bottom" title="Contact Support"
+            ng-click="openZohoTicketForm()" data-bs-trigger="hover">
+            <img src="dashboard/images/support-zoho.png" alt="" />
+          </button>
+          <button class="btn btn-outline-light navbar-actions-btn" type="button" data-bs-toggle="tooltip"
+            data-bs-placement="bottom" title="Sign Out" ng-click="do_logout()" data-bs-trigger="hover">
+            <img src="dashboard/images/power.png" alt="" />
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- main content -->
+  <section class="banner-wrapper container-fluid">
+
+    <!-- upper row -->
+    <div class="row mb-4 banner-upper-row">
+      <div class="col-12 col-lg-7 p-4 carousel-container">
+        <div id="carouselExampleIndicators" class="carousel slide carousel-fade carousel-dark" data-bs-ride="carousel"
+          data-bs-pause="false">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+              aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" ng-repeat="carouselObject in carouselImagesData" ng-if="$index !== 0"
+              data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{$index}}"
+              aria-label="Slide {{$index + 1}}"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="{{carouselImagesData[0].thumbnailUrl}}" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item" ng-repeat="carouselObject in carouselImagesData" ng-if="$index !== 0">
+              <img src="{{carouselObject.thumbnailUrl}}" class="d-block w-100" alt="...">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+      <div class="col-12 col-lg-2 p-3">
+        <div class="row banner-action-btns-container">
+          <!-- for Org Chart there's no access restriction -->
+          <div class="col-3 col-lg-6 p-3 p-lg-2 banner-action-btn-card">
+            <button class="btn bg-primary w-100 h-100 banner-action-btn" ng-click="respondToMenuItemClick(69)">
+              <div class="p-2">
+                <img src="dashboard/images/connection.png" class="action-btn-image" alt="" />
+              </div>
+              <p>Org Chart</p>
+            </button>
+          </div>
+          <div class="col-3 col-lg-6 p-3 p-lg-2 banner-action-btn-card" ng-if="renderCAToolsBtn">
+            <button class="btn bg-success w-100 h-100 banner-action-btn" ng-click="respondToMenuItemClick(68)">
+              <div class="p-2">
+                <img src="dashboard/images/calendar.png" class="action-btn-image" alt="" />
+              </div>
+              <p>CA Tools</p>
+            </button>
+          </div>
+          <div class="col-3 col-lg-6 p-3 p-lg-2 banner-action-btn-card" ng-if="renderPolicyBtn">
+            <button class="btn bg-danger w-100 h-100 banner-action-btn" ng-click="respondToMenuItemClick(57)">
+              <div class="p-2">
+                <img src="dashboard/images/policy.png" class="action-btn-image" alt="" />
+              </div>
+              <p>Policy</p>
+            </button>
+          </div>
+          <div class="col-3 col-lg-6 p-3 p-lg-2 banner-action-btn-card" ng-if="renderVOCBtn" ng-click="respondToMenuItemClick(58)">
+            <button class="btn bg-info w-100 h-100 banner-action-btn">
+              <div class="p-2">
+                <img src="dashboard/images/voice-search.png" class="action-btn-image" alt="" />
+              </div>
+              <p>VOC</p>
+            </button>
+          </div>
+          <div class="col-3 col-lg-6 p-3 p-lg-2 banner-action-btn-card" ng-if="renderReporteesBtn">
+            <button class="btn bg-warning w-100 h-100 banner-action-btn banner-action-btn-reportees" ng-click="respondToMenuItemClick(7)">
+              <div class="p-2">
+                <img src="dashboard/images/diagram.png" class="action-btn-image" alt="" />
+              </div>
+              <p>Reportees</p>
+            </button>
+          </div>
+          <div class="col-3 col-lg-6 p-3 p-lg-2 banner-action-btn-card" ng-if="renderProdTrackingBtn">
+            <button class="btn bg-warning w-100 h-100 banner-action-btn banner-action-btn-productivity"
+              ng-click="respondToMenuItemClick(67)">
+              <div class="p-2">
+                <img src="dashboard/images/fast.png" class="action-btn-image" alt="" />
+              </div>
+              <p>Productivity</p>
+            </button>
+          </div>
+          <div class="col-3 col-lg-6 p-3 p-lg-2 banner-action-btn-card" ng-if="renderPrsBtn">
+            <button class="btn bg-warning w-100 h-100 banner-action-btn banner-action-btn-prs" ng-click="respondToMenuItemClick(49)">
+              <div class="p-2">
+                <img src="dashboard/images/kpi.png" class="action-btn-image" alt="">
+              </div>
+              <p>PRS</p>
+            </button>
+          </div>
+          <!-- for New Joinees button there's no access restriction -->
+          <div class="col-3 col-lg-6 p-3 p-lg-2 banner-action-btn-card">
+            <button class="btn bg-warning w-100 h-100 banner-action-btn" data-bs-toggle="popover"
+            data-bs-placement="bottom" data-bs-content="Coming Soon!"
+            data-bs-content="Coming Soon!">
+              <div class="p-2">
+                <img src="dashboard/images/reading.png" class="action-btn-image" alt="">
+              </div>
+              <p>New Joinees</p>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-3 p-4">
+        <div class="banner-card">
+          <div class="banner-card-header">
+            <h5>Notice Board</h5>
+          </div>
+          <div class="event-and-news-wrapper">
+            <div class="mt-4 p-3">
+              <div class="event-and-news-card-container" ng-repeat="object in eventAndNewsData">
+                <div class="row event-and-news-card align-items-start">
+                  <div class="col-2 date-container {{
+                        object.backgroundColorClass
+                      }}" ng-if="object.typeId === dashboardItemTypesConstants.EVENT">
+                    <p>{{ getFormattedDate(object.itemDate) }}</p>
+                    <hr />
+                    <p>{{ getFormattedMonth(object.itemDate) }}</p>
+                  </div>
+                  <div class="col-2 news-thumbnail-container" ng-if="object.typeId === dashboardItemTypesConstants.NEWS">
+                    <img src="{{ object.thumbnailUrl }}" alt="" srcset="" />
+                  </div>
+                  <div class="col-10 event-and-news-content-container"
+                    ng-click="redirectToNewsOrEvent(object.redirectionUrl)">
+                    <h5>{{ object.title }}</h5>
+                    <p>{{ object.description }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- upper row -->
+
+    <!-- bottom row -->
+    <div class="banner-lower-row row">
+      <div class="col-12 col-lg-4 p-4">
+        <div class="banner-card">
+          <div class="banner-card-header banner-card-header-green">
+            <h5>Gallery</h5>
+          </div>
+          <div class="gallery-wrapper p-3">
+            <div class="gallery-card row mt-4" ng-repeat="gallery in galleryData">
+              <div class="col-5 bubble bubble-right" ng-if="$index % 2 != 0">
+                <h5>{{ gallery.title }}</h5>
+                <a class="explore-this-link" href="{{ gallery.redirectionUrl }}" target="_blank">Explore this</a>
+              </div>
+              <div class="gallery-card-thumbnail-container gallery-card-thumbnail-container-right col-7" ng-if="$index % 2 != 0">
+                <img src="{{ gallery.thumbnailUrl }}" alt="{{ gallery.title }}" />
+              </div>
+              <div class="gallery-card-thumbnail-container gallery-card-thumbnail-container-left col-7" ng-if="$index % 2 == 0">
+                <img src="{{ gallery.thumbnailUrl }}" alt="{{ gallery.title }}" />
+              </div>
+              <div class="col-5 bubble bubble-left" ng-if="$index % 2 == 0">
+                <h5>{{ gallery.title }}</h5>
+                <a class="explore-this-link" href="{{ gallery.redirectionUrl }}" target="_blank">Explore this</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4 p-4">
+        <div class="banner-card banner-card-wo-fixed-height">
+          <div class="banner-card-header">
+            <h5><span>NAPIER</span> Culture</h5>
+          </div>
+          <div class="know-my-napier-content-container p-3">
+            <div class="tabs-btn-group">
+              <button class="tab-btn" ng-repeat="tabData in napierCultureTabsData"
+                ng-class="{ 'active-tab-btn': currentTab == tabData.dashboardDataSeqId }"
+                ng-click="changeNapierCultureTab(tabData.dashboardDataSeqId)">
+                {{ tabData.title | uppercase }}
+              </button>
+            </div>
+            <div class="know-your-napier-tab-text" ng-bind-html="trustAsHtml(modalTabText)">
+            </div>
+            <a class="read-more-link" href="{{cultureTabReadMoreLink}}" target="_blank">Read More
+              <img class="right-arrow-icon" src="dashboard/images/right-arrow.gif" alt="" srcset="" /></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4 p-4">
+        <div class="banner-card banner-card-wo-fixed-height">
+          <div class="banner-card-header banner-card-header-green">
+            <h5>What's happening</h5>
+          </div>
+          <div class="iframes-wrapper">
+            <div class="iframe-repeater-wrapper" ng-repeat="object in linkedInData" ng-bind-html="trustAsHtml(object.thumbnailUrl)">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- bottom row -->
+
+  </section>
+  <!-- main content -->
+
+  <footer>
+    <p>
+      Copyright &copy; {{ copyrightYear }} Napier Healthcare, All Rights Reserved.
+    </p>
+  </footer>
+
+  <!-- main script -->
+  <script src="dashboard/app/dashboard.scripts.js"></script>
+</body>
+
+</html>

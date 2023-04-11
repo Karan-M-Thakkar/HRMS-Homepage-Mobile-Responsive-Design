@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="dashboardAdminApp">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HRMS</title>
+  <!-- jQuery v3.6.1 -->
+  <script src="../js/jquery-3.6.1.min.js"></script>
+
+  <!-- Bootstrap CDN Downlaod v3.3.7 -->
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+
+  <!-- angularJS v1.8.2 -->
+  <script src="../js/angular.min.js"></script>
+  <script src="../js/angular-animate.min.js"></script>
+  <script src="../js/angular-sanitize.min.js"></script>
+
+  <!-- UI Bootstrap 2.5.0 -->
+  <script src="../js/ui-bootstrap-tpls-2.5.0.min.js"></script>
+
+  <!-- commonSessionStroage Custom JS script -->
+  <script src="../../resources/js/commonSessionStorageHrms.js" type="text/javascript"></script>
+
+  <!-- ui-grid v4.11.1 -->
+  <script src="../js/ui-grid.min.js"></script>
+  <link rel="stylesheet" href="../css/ui-grid.min.css">
+
+  <!-- custom CSS -->
+  <link rel="stylesheet" href="../css/dashboard.admin.styles.css" />
+
+  <!-- alerts css -->
+  <link rel="stylesheet" href="../app/alerts/alert.styles.css">
+</head>
+
+<body ng-controller="DashboardAdminController">
+  <div class="loader-background" api-call-loader>
+    <span class="loader"></span>
+  </div>
+  <div class="branding-ribbon-container">
+    <a href="#" class="branding-ribbon-logo-container">
+      <img src="../images/Napier Catalyst_Web_white.png" alt="" ng-click="redirectToDashboard()" />
+    </a>
+  </div>
+  <div class="container">
+    <div class="row content-wrapper">
+      <div class="col-xs-2 back-btn-wrapper" ng-show="formMode === 'search'">
+        <button class="btn btn-primary back-to-search-btn" ng-click="redirectToDashboard()"><img src="../images/arrow.png" alt="" srcset=""><span>Back to Homepage</span></button>
+      </div>
+      <div class="col-xs-2 back-btn-wrapper" ng-show="formMode !== 'search'">
+        <button class="btn btn-primary back-to-search-btn" ng-click="backToSearch()"><img src="../images/arrow.png" alt="" srcset=""><span>Back to Search</span></button>
+      </div>
+      <div class="col-xs-12 right-content-wrapper">
+        <div class="admin-search-container" ng-show="formMode === 'search'">
+          <h4 class="container-header">Search</h4>
+          <div class="row">
+            <div class="col-xs-2">
+              <p class="input-group">
+                <input type="text" placeholder="From" class="form-control date-input" uib-datepicker-popup="dd-MM-yyyy"
+                  ng-model="searchFormData.fromDate" is-open="fromDatePopup.opened" datepicker-options="fromDateOptions"
+                  show-button-bar="false" ng-blur="restrictToDate()" ng-readonly="true" />
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="openFromDatepicker()">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                  </button>
+                </span>
+              </p>
+            </div>
+            <div class="col-xs-2">
+              <p class="input-group">
+                <input type="text" placeholder="To" class="form-control date-input" uib-datepicker-popup="dd-MM-yyyy"
+                  ng-model="searchFormData.toDate" is-open="toDatePopup.opened" datepicker-options="toDateOptions"
+                  show-button-bar="false" ng-readonly="true" />
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="openToDatepicker()">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                  </button>
+                </span>
+              </p>
+            </div>
+            <div class="col-xs-2">
+              <select class="form-control" ng-model="searchFormData.searchType">
+                <option value="">select</option>
+                <option ng-repeat="object in dashboardItemTypes" value="{{object.taskId}}">{{object.taskName | capitalize}}</option>
+              </select>
+            </div>
+            <div class="col-xs-2 button-group">
+              <button class="btn btn-primary" ng-click="search()">Search</button>
+              <button class="btn btn-secondary" ng-click="clearSearchInputs()">Clear</button>
+            </div>
+            <div class="col-xs-2"></div>
+            <div class="col-xs-2">
+              <button class="btn btn-success add-btn" ng-click="addNew()"><img src="../images/add.png" alt="" srcset=""><span>Add</span></button>
+            </div>
+          </div>
+          <div class="row search-grid-row">
+            <div class="col-xs-12 search-grid-column">
+              <div id="searchGrid" ui-grid="searchGridOptions" ui-grid-pagination ui-grid-pinning ui-grid-resize-columns class="grid">
+                <div class="no-records-watermark" ng-show="!searchGridOptions.data.length">No records to show</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <form class="admin-form-container" name="saveOrUpdateForm" ng-show="formMode !== 'search'">
+          <h4 class="container-header">{{formMode | capitalize}}</h4>
+          <div class="row">
+            <div class="form-group col-xs-2">
+              <label class="required-field" for="newsTitle">Type</label>
+              <select name="type" class="form-control" ng-model="formData.activeFormType"
+                ng-class="{'not-valid': !saveOrUpdateForm.type.$valid && submitAttempted}" ng-change="onActiveFormTypeChange()" ng-disabled="formMode === 'update'" required>
+                <option value="">select</option>
+                <option ng-repeat="object in dashboardItemTypes" value="{{object.taskId}}">{{object.taskName | capitalize}}</option>
+              </select>
+            </div>
+            <div class="form-group col-xs-10">
+              <label class="required-field" for="title">Title</label>
+              <input type="text" name="title" class="form-control" id="title" ng-model="formData.title"
+                ng-class="{'not-valid': !saveOrUpdateForm.title.$valid && submitAttempted}" required />
+            </div>
+            <div class="form-group col-xs-12">
+              <label class="required-field" for="description">Description</label>
+              <textarea type="text" name="description" class="form-control" id="description" rows="3"
+                ng-model="formData.description"
+                ng-class="{'not-valid': !saveOrUpdateForm.description.$valid && submitAttempted}" required></textarea>
+            </div>
+            <div class="form-group col-xs-12"
+              ng-if="!(formData.activeFormType === dashboardItemTypesConstants.EVENT || formData.activeFormType === dashboardItemTypesConstants.CULTURE_TAB)">
+              <label class="required-field" for="thumbnailURL">{{formData.activeFormType === dashboardItemTypesConstants.LINKEDIN ? 'LinkedIn Embedded Post' : 'Thumbnail/ Image URL'}}</label>
+              <div class="alert alert-danger" role="alert" ng-show="formData.activeFormType === dashboardItemTypesConstants.LINKEDIN">Please remove the existing width and height, and set width="100%" & increase the height by 150-200 for smooth experience, we'll fix this soon!</div>
+              <input type="text" name="thumbnailURL" class="form-control" id="thumbnailURL"
+                ng-model="formData.thumbnailURL"
+                ng-class="{'not-valid': !saveOrUpdateForm.thumbnailURL.$valid && submitAttempted}" required />
+            </div>
+            <div class="form-group col-xs-12" ng-if="!(formData.activeFormType === dashboardItemTypesConstants.LINKEDIN)">
+              <label class="required-field" for="redirectionURL">Redirection URL</label>
+              <input type="text" name="redirectionURL" class="form-control" id="redirectionURL"
+                ng-model="formData.redirectionURL"
+                ng-class="{'not-valid': !saveOrUpdateForm.redirectionURL.$valid && submitAttempted}" required />
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-3"
+              ng-if="!(formData.activeFormType === dashboardItemTypesConstants.CULTURE_TAB)">
+              <label class="required-field" for="expiryDate">Expiry Date</label>
+              <p class="input-group">
+                <input id="expiryDate" type="text" name="expiryDate" class="form-control date-input"
+                  uib-datepicker-popup="dd-MM-yyyy" ng-model="formData.expiryDate" is-open="expiryDatePopup.opened"
+                  datepicker-options="expiryDateOptions" show-button-bar="false" ng-readonly="true"
+                  ng-class="{'not-valid': !saveOrUpdateForm.expiryDate.$valid && submitAttempted}" required />
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="openExpiryDatepicker()">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                  </button>
+                </span>
+              </p>
+            </div>
+            <div class="form-group col-xs-3" ng-if="!(formData.activeFormType !== dashboardItemTypesConstants.EVENT)">
+              <label class="required-field" for="eventDate">Event Date</label>
+              <p class="input-group">
+                <input id="eventDate" type="text" name="eventDate" class="form-control date-input"
+                  uib-datepicker-popup="dd-MM-yyyy" ng-model="formData.eventDate" is-open="eventDatePopup.opened"
+                  datepicker-options="eventDateOptions" show-button-bar="false" ng-readonly="true" required
+                  ng-class="{'not-valid': !saveOrUpdateForm.eventDate.$valid && submitAttempted}" required />
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default"
+                    ng-class="{'not-valid': !saveOrUpdateForm.eventDate.$valid && submitAttempted}"
+                    ng-click="openEventDatepicker()">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                  </button>
+                </span>
+              </p>
+            </div>
+            <div class="form-group col-xs-3" ng-if="formMode === 'update'">
+              <label class="required-field" for="status">Status</label>
+              <div>
+                <label class="radio-inline">
+                  <input type="radio" name="statusRadioOptions" id="status" value="active" ng-model="formData.status"
+                    required />
+                  Active
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="statusRadioOptions" id="status" value="inactive" ng-model="formData.status"
+                    required />
+                  Inactive
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-4 button-group">
+              <button class="btn btn-success" ng-click="saveOrUpdate()">
+                {{formMode === 'create' ? 'Save' : 'Update'}}
+              </button>
+              <button class="btn btn-secondary" type="button" ng-if="formMode === 'create'" ng-click="clear()">
+                Clear
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="../app/alerts/alert.service.js"></script>
+  <script src="../app/dashboard.admin.controller.js"></script>
+</body>
+
+</html>

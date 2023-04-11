@@ -1,0 +1,6 @@
+<div class="alert-wrapper">
+    <img src="../images/warning.gif" alt="" srcset="">
+    <h4>{{alert.display.alertType | uppercase}}</h4>
+    <p class="alert-description" ng-bind-html="alert.trustAsHtml(alert.display.description)"></p>
+    <button class="btn btn-primary alert-contact-support-btn" ng-show="alert.display.buttonText" ng-click="alert.display.buttonCallbacFn()">{{alert.display.buttonText}}</button>
+</div>
