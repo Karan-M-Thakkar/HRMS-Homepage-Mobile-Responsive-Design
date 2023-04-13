@@ -75,7 +75,7 @@ body {
   background-size: contain;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 992px) {
   .branding-ribbon-container {
     height: 80px;
   }
@@ -102,7 +102,7 @@ body {
   width: 200px;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 992px) {
   .branding-ribbon-logo-container > img {
     width: 240px;
   }
@@ -112,7 +112,7 @@ body {
   content: none;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 992px) {
   .dropdown:hover .dropdown-menu {
     display: block;
   }
@@ -127,7 +127,7 @@ body {
   border-color: #ffffff;
 }
 
-@media  screen and (min-width: 768px) {
+@media  screen and (min-width: 992px) {
   .navbar {
     height: 72px;
   }
@@ -137,7 +137,7 @@ body {
   color: #fefefe;
 }
 
-@media  screen and (min-width: 768px) {
+@media  screen and (min-width: 992px) {
   .nav-link {
     font-size: 1rem;
     text-align: center;
@@ -225,7 +225,7 @@ body {
   height: 16px;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 992px) {
   .navbar-actions-btn > img {
     width: 24px;
     height: 24px;
@@ -238,13 +238,13 @@ body {
   background-color: #f9fbfe;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 992px) {
   .banner-upper-row {
     max-height: 520px;
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 992px) {
   .banner-lower-row {
     max-height: 560px;
   }
@@ -304,7 +304,7 @@ body {
   overflow: hidden;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 992px) {
   .carousel-container {
     height: 520px;
   }
@@ -354,7 +354,7 @@ body {
   transform: translate(-50%, -50%);
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 992px) {
   .banner-action-btns-container {
     max-height: 320px;
   }
@@ -515,10 +515,10 @@ body {
   flex-grow: 0;
   margin: 0;
   width: 100%;
-  font-size: 10px;
+  font-size: 9px;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 992px) {
   .banner-action-btn > p {
     font-size: inherit;
   }

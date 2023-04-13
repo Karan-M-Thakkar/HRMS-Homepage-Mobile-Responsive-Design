@@ -3468,14 +3468,14 @@ dashboardApp.controller("dashboardCtrl", function ($scope, $log, $http, $sce) {
   };
 
   $scope.openDashboardAdmin = () => {
-    let modMap = JSON.parse(
+    /* let modMap = JSON.parse(
       commonSessionstorage.sessionStorage.getItem("modMap")
     );
     commonSessionstorage.sessionStorage.setItem("currentModuleID", 76);
     commonSessionstorage.sessionStorage.setItem(
       "moduleID",
       JSON.stringify(modMap[76])
-    );
+    ); */
     window.open("dashboard/views/dashboard.administration.html", "_self");
   };
 

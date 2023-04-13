@@ -86,7 +86,7 @@
 
     <!-- upper row -->
     <div class="row mb-4 banner-upper-row">
-      <div class="col-12 col-lg-7 p-4 carousel-container">
+      <div class="col-12 col-md-8 col-lg-7 m-md-auto p-4 carousel-container">
         <div id="carouselExampleIndicators" class="carousel slide carousel-fade carousel-dark" data-bs-ride="carousel"
           data-bs-pause="false">
           <div class="carousel-indicators">
@@ -116,10 +116,10 @@
           </button>
         </div>
       </div>
-      <div class="col-12 col-lg-2 p-3">
+      <div class="col-12 col-md-4 col-lg-2 p-3">
         <div class="row banner-action-btns-container">
           <!-- for Org Chart there's no access restriction -->
-          <div class="col-3 col-lg-6 p-3 p-lg-2 banner-action-btn-card">
+          <div class="col-3 col-md-6 p-3 p-lg-2 banner-action-btn-card">
             <button class="btn bg-primary w-100 h-100 banner-action-btn" ng-click="respondToMenuItemClick(69)">
               <div class="p-2">
                 <img src="dashboard/images/connection.png" class="action-btn-image" alt="" />
@@ -127,7 +127,7 @@
               <p>Org Chart</p>
             </button>
           </div>
-          <div class="col-3 col-lg-6 p-3 p-lg-2 banner-action-btn-card" ng-if="renderCAToolsBtn">
+          <div class="col-3 col-md-6 p-3 p-lg-2 banner-action-btn-card" ng-if="renderCAToolsBtn">
             <button class="btn bg-success w-100 h-100 banner-action-btn" ng-click="respondToMenuItemClick(68)">
               <div class="p-2">
                 <img src="dashboard/images/calendar.png" class="action-btn-image" alt="" />
@@ -135,7 +135,7 @@
               <p>CA Tools</p>
             </button>
           </div>
-          <div class="col-3 col-lg-6 p-3 p-lg-2 banner-action-btn-card" ng-if="renderPolicyBtn">
+          <div class="col-3 col-md-6 p-3 p-lg-2 banner-action-btn-card" ng-if="renderPolicyBtn">
             <button class="btn bg-danger w-100 h-100 banner-action-btn" ng-click="respondToMenuItemClick(57)">
               <div class="p-2">
                 <img src="dashboard/images/policy.png" class="action-btn-image" alt="" />
@@ -143,7 +143,7 @@
               <p>Policy</p>
             </button>
           </div>
-          <div class="col-3 col-lg-6 p-3 p-lg-2 banner-action-btn-card" ng-if="renderVOCBtn" ng-click="respondToMenuItemClick(58)">
+          <div class="col-3 col-md-6 p-3 p-lg-2 banner-action-btn-card" ng-if="renderVOCBtn" ng-click="respondToMenuItemClick(58)">
             <button class="btn bg-info w-100 h-100 banner-action-btn">
               <div class="p-2">
                 <img src="dashboard/images/voice-search.png" class="action-btn-image" alt="" />
@@ -151,7 +151,7 @@
               <p>VOC</p>
             </button>
           </div>
-          <div class="col-3 col-lg-6 p-3 p-lg-2 banner-action-btn-card" ng-if="renderReporteesBtn">
+          <div class="col-3 col-md-6 p-3 p-lg-2 banner-action-btn-card" ng-if="renderReporteesBtn">
             <button class="btn bg-warning w-100 h-100 banner-action-btn banner-action-btn-reportees" ng-click="respondToMenuItemClick(7)">
               <div class="p-2">
                 <img src="dashboard/images/diagram.png" class="action-btn-image" alt="" />
@@ -159,7 +159,7 @@
               <p>Reportees</p>
             </button>
           </div>
-          <div class="col-3 col-lg-6 p-3 p-lg-2 banner-action-btn-card" ng-if="renderProdTrackingBtn">
+          <div class="col-3 col-md-6 p-3 p-lg-2 banner-action-btn-card" ng-if="renderProdTrackingBtn">
             <button class="btn bg-warning w-100 h-100 banner-action-btn banner-action-btn-productivity"
               ng-click="respondToMenuItemClick(67)">
               <div class="p-2">
@@ -168,7 +168,7 @@
               <p>Productivity</p>
             </button>
           </div>
-          <div class="col-3 col-lg-6 p-3 p-lg-2 banner-action-btn-card" ng-if="renderPrsBtn">
+          <div class="col-3 col-md-6 p-3 p-lg-2 banner-action-btn-card" ng-if="renderPrsBtn">
             <button class="btn bg-warning w-100 h-100 banner-action-btn banner-action-btn-prs" ng-click="respondToMenuItemClick(49)">
               <div class="p-2">
                 <img src="dashboard/images/kpi.png" class="action-btn-image" alt="">
@@ -177,7 +177,7 @@
             </button>
           </div>
           <!-- for New Joinees button there's no access restriction -->
-          <div class="col-3 col-lg-6 p-3 p-lg-2 banner-action-btn-card">
+          <div class="col-3 col-md-6 p-3 p-lg-2 banner-action-btn-card">
             <button class="btn bg-warning w-100 h-100 banner-action-btn" data-bs-toggle="popover"
             data-bs-placement="bottom" data-bs-content="Coming Soon!"
             data-bs-content="Coming Soon!">
@@ -189,7 +189,7 @@
           </div>
         </div>
       </div>
-      <div class="col-12 col-lg-3 p-4">
+      <div class="col-12 col-md-6 col-lg-3 p-4">
         <div class="banner-card">
           <div class="banner-card-header">
             <h5>Notice Board</h5>
@@ -219,12 +219,7 @@
           </div>
         </div>
       </div>
-    </div>
-    <!-- upper row -->
-
-    <!-- bottom row -->
-    <div class="banner-lower-row row">
-      <div class="col-12 col-lg-4 p-4">
+      <div class="col-12 d-lg-none col-md-6 col-lg-4 p-4">
         <div class="banner-card">
           <div class="banner-card-header banner-card-header-green">
             <h5>Gallery</h5>
@@ -249,7 +244,37 @@
           </div>
         </div>
       </div>
-      <div class="col-12 col-lg-4 p-4">
+    </div>
+    <!-- upper row -->
+
+    <!-- bottom row -->
+    <div class="banner-lower-row row">
+      <div class="col-12 d-none d-lg-block col-md-6 col-lg-4 p-4">
+        <div class="banner-card">
+          <div class="banner-card-header banner-card-header-green">
+            <h5>Gallery</h5>
+          </div>
+          <div class="gallery-wrapper p-3">
+            <div class="gallery-card row mt-4" ng-repeat="gallery in galleryData">
+              <div class="col-5 bubble bubble-right" ng-if="$index % 2 != 0">
+                <h5>{{ gallery.title }}</h5>
+                <a class="explore-this-link" href="{{ gallery.redirectionUrl }}" target="_blank">Explore this</a>
+              </div>
+              <div class="gallery-card-thumbnail-container gallery-card-thumbnail-container-right col-7" ng-if="$index % 2 != 0">
+                <img src="{{ gallery.thumbnailUrl }}" alt="{{ gallery.title }}" />
+              </div>
+              <div class="gallery-card-thumbnail-container gallery-card-thumbnail-container-left col-7" ng-if="$index % 2 == 0">
+                <img src="{{ gallery.thumbnailUrl }}" alt="{{ gallery.title }}" />
+              </div>
+              <div class="col-5 bubble bubble-left" ng-if="$index % 2 == 0">
+                <h5>{{ gallery.title }}</h5>
+                <a class="explore-this-link" href="{{ gallery.redirectionUrl }}" target="_blank">Explore this</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4 p-4">
         <div class="banner-card banner-card-wo-fixed-height">
           <div class="banner-card-header">
             <h5><span>NAPIER</span> Culture</h5>
@@ -269,7 +294,7 @@
           </div>
         </div>
       </div>
-      <div class="col-12 col-lg-4 p-4">
+      <div class="col-12 col-md-6 m-md-auto col-lg-4 p-4">
         <div class="banner-card banner-card-wo-fixed-height">
           <div class="banner-card-header banner-card-header-green">
             <h5>What's happening</h5>
