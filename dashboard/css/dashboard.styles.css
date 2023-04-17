@@ -496,6 +496,14 @@ body {
   font-size: 0.9rem;
 }
 
+/* if directly applying .col-xxl-4 bootstrap class, it applies on 1440px, but need to apply this after 1700px, hence customized */
+@media screen and (min-width: 1700px) {
+  .col-xxl-4-custom {
+    flex: 0 0 auto;
+    width: 33.33333333%;
+  }
+}
+
 .banner-action-btn-card {
   min-height: 100px;
 }
