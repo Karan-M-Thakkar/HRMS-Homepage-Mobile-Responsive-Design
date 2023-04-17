@@ -13,6 +13,18 @@ html {
   overflow-y: auto;
 }
 
+@media screen and (min-width: 992px) {
+  html {
+    font-size: 13px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  html {
+    font-size: 14px;
+  }
+}
+
 html::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
@@ -28,36 +40,6 @@ html::-webkit-scrollbar-thumb {
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(241, 241, 241, 0.3);
   background-color: #555;
-}
-
-@media (min-width: 1024px) {
-  html {
-    font-size: 9px;
-  }
-}
-
-@media (min-width: 1088px) {
-  html {
-    font-size: 11px;
-  }
-}
-
-@media (min-width: 1120px) {
-  html {
-    font-size: 12px;
-  }
-}
-
-@media (min-width: 1320px) {
-  html {
-    font-size: 13px;
-  }
-}
-
-@media (min-width: 1440px) {
-  html {
-    font-size: 14px;
-  }
 }
 
 body {
@@ -121,10 +103,6 @@ body {
 
 .navbar {
   background-color: #3653a4;
-}
-
-.navbar-toggler {
-  border-color: #ffffff;
 }
 
 @media  screen and (min-width: 992px) {
@@ -515,13 +493,7 @@ body {
   flex-grow: 0;
   margin: 0;
   width: 100%;
-  font-size: 9px;
-}
-
-@media screen and (min-width: 992px) {
-  .banner-action-btn > p {
-    font-size: inherit;
-  }
+  font-size: 0.9rem;
 }
 
 .banner-action-btn-card {
